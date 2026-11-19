@@ -126,7 +126,6 @@
       font-weight: 600;
     }
 
-    /* صندوق العد التنازلي التفاعلي */
     .countdown-banner {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(234, 88, 12, 0.25));
       border: 1.5px solid rgba(251, 191, 36, 0.5);
@@ -161,7 +160,6 @@
       margin-bottom: 12px;
     }
 
-    /* قائمة المواعيد التفاعلية */
     .events-list {
       display: grid;
       gap: 12px;
@@ -230,7 +228,6 @@
       box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
     }
 
-    /* صندوق الملاحظة */
     .trailer-note {
       margin-top: 18px;
       background: rgba(251, 191, 36, 0.12);
@@ -293,7 +290,7 @@
           <span class="event-icon">🎬</span>
           <div>
             <div class="event-title">التريلر الرسمي</div>
-            <div class="event-desc">أول نظرة حماسية على عالم اللعبة</div>
+            <div class="event-desc">أول نظرة حماسية على عالم الفلافل</div>
           </div>
         </div>
         <span class="event-date">11/23</span>
@@ -304,7 +301,7 @@
           <span class="event-icon">🚀</span>
           <div>
             <div class="event-title">موعد النزول</div>
-            <div class="event-desc">الانطلاق الرسمي وفتح أبواب المطعم!</div>
+            <div class="event-desc">الانطلاق الرسمي للعبة وفتح أبواب المطعم!</div>
           </div>
         </div>
         <span class="event-date">11/24</span>
@@ -312,10 +309,10 @@
 
       <div class="event-card" data-index="2" role="button" tabindex="0">
         <div class="event-info">
-          <span class="event-icon">📖</span>
+          <span class="event-icon">🎥</span>
           <div>
-            <div class="event-title">مود القصة باللعبة</div>
-            <div class="event-desc">مهام، أسرار، وتحديات بناء الإمبراطورية</div>
+            <div class="event-title">فيلم القصة: عالم الفلافل (5 دقائق)</div>
+            <div class="event-desc">رحلة الصعود من الكشك الصغير إلى الإمبراطورية</div>
           </div>
         </div>
         <span class="event-date">11/25</span>
@@ -389,11 +386,11 @@
       }
     });
 
-    // بيانات المواعيد والتفاعل عند الضغط
+    // بيانات المواعيد في العد التنازلي
     const events = [
       { name: "التريلر الرسمي (11/23)", date: new Date(2026, 10, 23, 0, 0, 0) },
       { name: "موعد النزول (11/24)", date: new Date(2026, 10, 24, 0, 0, 0) },
-      { name: "مود القصة باللعبة (11/25)", date: new Date(2026, 10, 25, 0, 0, 0) }
+      { name: "فيلم القصة: عالم الفلافل (11/25)", date: new Date(2026, 10, 25, 0, 0, 0) }
     ];
 
     let selectedIndex = 0;
