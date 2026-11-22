@@ -1,440 +1,316 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>عالم الفلافل</title>
-  <style>
-    :root {
-      --bg-1: #160c05;
-      --bg-2: #2b1507;
-      --card: rgba(34, 18, 8, 0.85);
-      --gold: #fbbf24;
-      --orange: #f97316;
-      --red: #ef4444;
-      --text: #fffbeb;
-      --muted: #fde68a;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>عالم الفلافل</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{box-sizing:border-box}
+html,body{
+  margin:0;width:100%;height:100%;overflow:hidden;
+  background:#050711;color:white;
+  font-family:Tajawal,Tahoma,Arial,sans-serif
+}
+#screen{
+  position:relative;width:100%;height:100%;
+  overflow:hidden;
+  background:linear-gradient(180deg,#080d1b,#17273a 55%,#070a11)
+}
+.sky{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 50% 45%,#30415a 0%,transparent 55%),
+    linear-gradient(#080d1b,#17283a 70%,#080b12);
+  animation:sky 15s ease-in-out infinite alternate
+}
+@keyframes sky{
+  to{transform:scale(1.07);filter:brightness(1.12)}
+}
+.stars{
+  position:absolute;inset:0;
+  background-image:
+    radial-gradient(2px 2px at 12% 20%,#fff 50%,transparent),
+    radial-gradient(1px 1px at 32% 60%,#fff 50%,transparent),
+    radial-gradient(2px 2px at 62% 15%,#fff 50%,transparent),
+    radial-gradient(1px 1px at 85% 35%,#fff 50%,transparent),
+    radial-gradient(2px 2px at 75% 75%,#fff 50%,transparent);
+  opacity:.6;
+  animation:twinkle 3s infinite alternate
+}
+@keyframes twinkle{to{opacity:1}}
 
-    body {
-      font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
-      background: radial-gradient(circle at top, #451a03 0%, var(--bg-2) 45%, var(--bg-1) 100%);
-      color: var(--text);
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 20px;
-      overflow-x: hidden;
-      position: relative;
-    }
+.city{
+  position:absolute;bottom:13%;height:48%;width:100%;
+  display:flex;align-items:flex-end;justify-content:center;
+  gap:clamp(4px,1.7vw,20px);
+  perspective:800px
+}
+.building{
+  position:relative;flex:none;
+  width:clamp(42px,9vw,115px);
+  height:var(--h);
+  background:linear-gradient(90deg,#101b29,#34475b 50%,#101a28);
+  border:1px solid #ffffff16;
+  box-shadow:0 0 30px #0008;
+  animation:rise 1.8s both;
+  transform-origin:bottom
+}
+@keyframes rise{
+  from{transform:translateY(70px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+.windows{
+  position:absolute;inset:12px 7px;
+  background:
+    repeating-linear-gradient(90deg,transparent 0 13px,#e4b75b 14px 17px,transparent 18px 26px),
+    repeating-linear-gradient(0deg,transparent 0 19px,#e4b75b 20px 23px,transparent 24px 32px);
+  opacity:.55;
+  animation:windows 3s infinite alternate
+}
+@keyframes windows{to{opacity:.85}}
 
-    #falling-container {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 1;
-    }
+.ground{
+  position:absolute;bottom:0;height:17%;width:100%;
+  background:linear-gradient(#202832,#07090d);
+  border-top:2px solid #ffffff18
+}
+.ground:after{
+  content:"";position:absolute;top:50%;width:100%;height:3px;
+  background:repeating-linear-gradient(90deg,#d8ae55 0 45px,transparent 45px 85px)
+}
+.haze{
+  position:absolute;bottom:12%;left:50%;
+  transform:translateX(-50%);
+  width:80vw;height:35vh;
+  background:radial-gradient(ellipse,#d49a4b19,transparent 70%);
+  pointer-events:none
+}
+.shade{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,#02040a45,#02040a12 40%,#02040acc);
+  pointer-events:none
+}
 
-    .falling-item {
-      position: absolute;
-      top: -80px;
-      user-select: none;
-      filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.5));
-      animation: fall linear forwards;
-    }
+/* صفحة الاستديو بدون شعار */
+#studio{
+  position:absolute;z-index:5;inset:0;
+  background:#05070d;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;
+  animation:studioOut .9s ease 3.5s forwards
+}
+.studioName{
+  font-size:clamp(34px,7vw,55px);
+  font-weight:900;
+  letter-spacing:1px;
+  animation:studioNameIn 1.2s ease both;
+  text-shadow:0 0 25px #ffffff20
+}
+.studioSub{
+  font-size:19px;color:#b9c1cf;
+  margin-top:13px;letter-spacing:4px;
+  animation:studioNameIn 1s .5s both
+}
+@keyframes studioNameIn{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes studioOut{
+  to{opacity:0;visibility:hidden}
+}
 
-    @keyframes fall {
-      0% {
-        transform: translateY(-80px) rotate(0deg) scale(0.9);
-        opacity: 0;
-      }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% {
-        transform: translateY(112vh) rotate(380deg) scale(1.1);
-        opacity: 0;
-      }
-    }
+/* المشاهد */
+.scene{
+  position:absolute;z-index:4;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;text-align:center;
+  padding:24px;opacity:0;visibility:hidden
+}
+#announcement{
+  animation:showAnnouncement .9s ease 4.1s forwards
+}
+@keyframes showAnnouncement{
+  from{opacity:0;visibility:visible;transform:scale(1.04)}
+  to{opacity:1;visibility:visible;transform:scale(1)}
+}
+.kicker{
+  font-size:clamp(14px,2.4vw,19px);
+  letter-spacing:4px;color:#c6cbd5;
+  margin-bottom:22px
+}
+.mainTitle{
+  font-size:clamp(39px,9vw,84px);
+  line-height:1.3;font-weight:900;
+  margin:0;max-width:95vw;
+  text-shadow:0 5px 30px #000
+}
+.time{
+  font-size:clamp(36px,8vw,72px);
+  font-weight:900;color:#f4bd55;
+  margin-top:20px;
+  text-shadow:0 0 35px #f4b94255;
+  animation:timeGlow 2.5s infinite alternate
+}
+@keyframes timeGlow{
+  to{text-shadow:0 0 40px #f4b94299}
+}
+.notice{
+  margin-top:30px;padding:13px 22px;
+  border:1px solid #ffffff35;
+  background:#090e18bd;border-radius:12px;
+  font-size:clamp(18px,3.4vw,25px);
+  line-height:1.8;max-width:90vw
+}
 
-    .hero-card {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 620px;
-      background: var(--card);
-      backdrop-filter: blur(12px);
-      border: 2px solid rgba(251, 191, 36, 0.35);
-      border-radius: 28px;
-      padding: 32px 26px;
-      box-shadow:
-        0 25px 60px rgba(0, 0, 0, 0.65),
-        0 0 40px rgba(249, 115, 22, 0.25);
-      text-align: center;
-      animation: popIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+/* شاشة الاعتذار: تظهر بسرعة وثابتة */
+#apology{
+  animation:apologyIn .65s ease 7.2s forwards;
+  transform:none;
+  filter:none;
+  overflow:hidden;
+  justify-content:center;
+}
+@keyframes apologyIn{
+  from{opacity:0;visibility:visible}
+  to{opacity:1;visibility:visible}
+}
+.apologyCard{
+  width:min(850px,94vw);
+  padding:clamp(25px,5vw,55px);
+  border:1px solid #ffffff22;
+  border-radius:20px;
+  background:linear-gradient(145deg,#111b2b,#080d17);
+  box-shadow:0 20px 70px #0007;
+}
+.apologyTitle{
+  font-size:clamp(34px,7vw,65px);
+  font-weight:900;color:#f4bd55;
+  margin:0 0 20px;line-height:1.4
+}
+.line{
+  height:2px;width:75px;
+  background:#e9b64f;margin:22px auto;
+  box-shadow:0 0 15px #e9b64f66
+}
+.apologyText{
+  font-size:clamp(20px,4vw,29px);
+  line-height:1.9;max-width:780px;
+  margin:0 auto;color:#f1f2f5;
+  overflow-wrap:break-word
+}
+.apologySmall{
+  font-size:clamp(15px,2.8vw,20px);
+  color:#aeb7c5;margin-top:20px
+}
+.footer{
+  position:absolute;bottom:25px;left:0;
+  width:100%;text-align:center;
+  color:#ffffff65;font-size:13px;
+  letter-spacing:3px
+}
 
-    @keyframes popIn {
-      from {
-        opacity: 0;
-        transform: translateY(24px) scale(0.96);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
+/* الجزيئات */
+.particles{
+  position:absolute;inset:0;z-index:3;
+  pointer-events:none
+}
+.particle{
+  position:absolute;bottom:-10px;
+  width:3px;height:3px;border-radius:50%;
+  background:#f4c56c;
+  animation:float var(--d) linear infinite;
+  animation-delay:var(--delay);opacity:0
+}
+@keyframes float{
+  15%{opacity:.7}
+  85%{opacity:.4}
+  100%{transform:translateY(-110vh) translateX(var(--x));opacity:0}
+}
 
-    .badge-top {
-      display: inline-block;
-      background: linear-gradient(90deg, var(--orange), var(--red));
-      color: #fff;
-      font-weight: 800;
-      font-size: 0.85rem;
-      padding: 6px 16px;
-      border-radius: 999px;
-      margin-bottom: 14px;
-      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.45);
-      animation: pulseBadge 1.8s infinite;
-    }
-
-    @keyframes pulseBadge {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.06); }
-    }
-
-    .game-title {
-      font-size: clamp(2.2rem, 5vw, 3.1rem);
-      font-weight: 900;
-      background: linear-gradient(180deg, #fef08a 0%, #f59e0b 55%, #ea580c 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 4px 14px rgba(245, 158, 11, 0.35));
-      margin-bottom: 6px;
-    }
-
-    .game-tagline {
-      font-size: 1.05rem;
-      color: var(--muted);
-      margin-bottom: 22px;
-      font-weight: 600;
-    }
-
-    .countdown-banner {
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(234, 88, 12, 0.25));
-      border: 1.5px solid rgba(251, 191, 36, 0.5);
-      border-radius: 18px;
-      padding: 16px;
-      margin-bottom: 18px;
-      transition: transform 0.2s ease;
-    }
-
-    .countdown-banner.flash {
-      transform: scale(1.03);
-    }
-
-    .countdown-label {
-      font-size: 0.95rem;
-      color: var(--muted);
-      margin-bottom: 6px;
-      font-weight: 700;
-    }
-
-    .countdown-timer {
-      font-size: 1.55rem;
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: 1px;
-      direction: ltr;
-    }
-
-    .click-hint {
-      font-size: 0.8rem;
-      color: rgba(253, 230, 138, 0.75);
-      margin-bottom: 12px;
-    }
-
-    .events-list {
-      display: grid;
-      gap: 12px;
-      text-align: right;
-    }
-
-    .event-card {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      background: rgba(20, 10, 4, 0.75);
-      border: 1.5px solid rgba(251, 191, 36, 0.2);
-      border-radius: 18px;
-      padding: 15px 18px;
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.22s ease;
-    }
-
-    .event-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(251, 191, 36, 0.65);
-      background: rgba(38, 19, 8, 0.9);
-    }
-
-    .event-card.active {
-      background: linear-gradient(135deg, rgba(249, 115, 22, 0.28), rgba(180, 83, 9, 0.34));
-      border-color: var(--gold);
-      box-shadow: 0 0 22px rgba(251, 191, 36, 0.28);
-      transform: scale(1.015);
-    }
-
-    .event-info {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .event-icon {
-      font-size: 1.7rem;
-    }
-
-    .event-title {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: #fff;
-    }
-
-    .event-desc {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    .event-date {
-      background: linear-gradient(135deg, #fbbf24, #f97316);
-      color: #1c0a00;
-      padding: 7px 15px;
-      border-radius: 999px;
-      font-weight: 900;
-      font-size: 0.98rem;
-      direction: ltr;
-      white-space: nowrap;
-      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
-    }
-
-    .trailer-note {
-      margin-top: 18px;
-      background: rgba(251, 191, 36, 0.12);
-      border: 1px dashed rgba(251, 191, 36, 0.55);
-      border-radius: 14px;
-      padding: 12px 16px;
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: #fef08a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .hype-btn {
-      margin-top: 18px;
-      width: 100%;
-      border: none;
-      cursor: pointer;
-      padding: 15px 22px;
-      border-radius: 16px;
-      font-size: 1.1rem;
-      font-weight: 900;
-      color: #1c0a00;
-      background: linear-gradient(90deg, #fde047, #f59e0b, #fb923c);
-      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4);
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-    }
-
-    .hype-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 30px rgba(245, 158, 11, 0.6);
-    }
-
-    .hype-btn:active {
-      transform: scale(0.97);
-    }
-  </style>
+@media(max-width:600px){
+  .city{height:39%;gap:3px}
+  .building{width:10vw}
+  .ground{height:15%}
+  .notice{padding:10px 14px}
+  .footer{bottom:15px}
+  .apologyCard{padding:28px 19px}
+}
+</style>
 </head>
+
 <body>
+<main id="screen">
 
-  <div id="falling-container" aria-hidden="true"></div>
+  <div class="sky">
+    <div class="stars"></div>
+  </div>
 
-  <main class="hero-card">
-    <span class="badge-top">🔥 استعد لأقوى مغامرة توصيل وبناء!</span>
-    <h1 class="game-title">عالم الفلافل</h1>
-    <p class="game-tagline">من كشك صغير... إلى إمبراطورية فلافل لا تُقهر!</p>
+  <div class="city">
+    <div class="building" style="--h:35%;animation-delay:.2s"><div class="windows"></div></div>
+    <div class="building" style="--h:58%;animation-delay:.4s"><div class="windows"></div></div>
+    <div class="building" style="--h:43%;animation-delay:.6s"><div class="windows"></div></div>
+    <div class="building" style="--h:72%;animation-delay:.8s"><div class="windows"></div></div>
+    <div class="building" style="--h:50%;animation-delay:1s"><div class="windows"></div></div>
+    <div class="building" style="--h:63%;animation-delay:1.2s"><div class="windows"></div></div>
+    <div class="building" style="--h:39%;animation-delay:1.4s"><div class="windows"></div></div>
+    <div class="building" style="--h:55%;animation-delay:1.6s"><div class="windows"></div></div>
+    <div class="building" style="--h:44%;animation-delay:1.8s"><div class="windows"></div></div>
+  </div>
 
-    <div class="countdown-banner" id="countdown-banner">
-      <div class="countdown-label" id="next-event-label">⏳ باقي على التريلر (11/23):</div>
-      <div class="countdown-timer" id="countdown">--d : --h : --m : --s</div>
+  <div class="ground"></div>
+  <div class="haze"></div>
+  <div class="shade"></div>
+  <div class="particles" id="particles"></div>
+
+  <section id="studio">
+    <div class="studioName">ASF ستديو</div>
+    <div class="studioSub">تُــقَــدِّم</div>
+  </section>
+
+  <section class="scene" id="announcement">
+    <div class="kicker">ASF STUDIO PRESENTS</div>
+    <h1 class="mainTitle">الإعلان الرسمي</h1>
+    <div class="time">قادم 2:50 الساعة</div>
+    <div class="notice">خلل في السيرفرات ونعتذر</div>
+    <div class="footer">عالم الفلافل · قريباً</div>
+  </section>
+
+  <section class="scene" id="apology">
+    <div class="apologyCard">
+      <div class="kicker">ASF STUDIO · NOTICE</div>
+      <h2 class="apologyTitle">رسالة اعتذار</h2>
+      <div class="line"></div>
+      <p class="apologyText">
+        نعتذر لكم عن الخلل الحاصل في السيرفرات،
+        ونؤكد لكم أننا نعمل على معالجة المشكلة،
+        ولن يتكرر هذا الخلل مرة أخرى بإذن الله.
+      </p>
+      <div class="apologySmall">شكراً لصبركم وتفهمكم</div>
     </div>
+    <div class="footer">ASF STUDIO</div>
+  </section>
 
-    <p class="click-hint">👆 اضغط على أي موعد بالأسفل لمعرفة كم باقي عليه بالضبط</p>
+</main>
 
-    <div class="events-list" id="events-list">
-      <div class="event-card active" data-index="0" role="button" tabindex="0">
-        <div class="event-info">
-          <span class="event-icon">🎬</span>
-          <div>
-            <div class="event-title">التريلر</div>
-            <div class="event-desc">عرض القصة كاملة في التريلر</div>
-          </div>
-        </div>
-        <span class="event-date">11/23</span>
-      </div>
+<script>
+(() => {
+  const area = document.getElementById('particles');
 
-      <div class="event-card" data-index="1" role="button" tabindex="0">
-        <div class="event-info">
-          <span class="event-icon">🚀</span>
-          <div>
-            <div class="event-title">موعد النزول</div>
-            <div class="event-desc">الانطلاق الرسمي للعبة وفتح أبواب المطعم!</div>
-          </div>
-        </div>
-        <span class="event-date">11/24</span>
-      </div>
+  for(let i=0;i<32;i++){
+    const p=document.createElement('i');
+    p.className='particle';
+    p.style.left=Math.random()*100+'%';
+    p.style.setProperty('--d',(8+Math.random()*10)+'s');
+    p.style.setProperty('--delay',(Math.random()*12)+'s');
+    p.style.setProperty('--x',(Math.random()*100-50)+'px');
+    area.appendChild(p);
+  }
 
-      <div class="event-card" data-index="2" role="button" tabindex="0">
-        <div class="event-info">
-          <span class="event-icon">🎮</span>
-          <div>
-            <div class="event-title">مود القصة</div>
-            <div class="event-desc">تلعب مع قصة</div>
-          </div>
-        </div>
-        <span class="event-date">11/25</span>
-      </div>
-    </div>
-
-    <div class="trailer-note">
-      <span>📌</span>
-      <span>ملاحظة: عرض التريلر بيكون من نفس هذا الرابط!</span>
-    </div>
-
-    <button class="hype-btn" id="hypeBtn">🧆 أمطرها فلافل وحمص! 🔥</button>
-  </main>
-
-  <script>
-    const container = document.getElementById("falling-container");
-
-    function createFoodSVG(type) {
-      if (type === "falafel") {
-        return `
-          <svg width="44" height="44" viewBox="0 0 64 64" fill="none">
-            <circle cx="32" cy="32" r="26" fill="#92400E" stroke="#451A03" stroke-width="3"/>
-            <circle cx="32" cy="32" r="21" fill="#B45309"/>
-            <circle cx="24" cy="24" r="2.2" fill="#FEF3C7"/>
-            <circle cx="38" cy="22" r="2" fill="#FEF3C7"/>
-            <circle cx="30" cy="34" r="2.3" fill="#FEF3C7"/>
-            <circle cx="41" cy="36" r="1.8" fill="#FEF3C7"/>
-            <circle cx="22" cy="39" r="2" fill="#FEF3C7"/>
-            <circle cx="34" cy="43" r="1.8" fill="#16A34A"/>
-            <circle cx="27" cy="28" r="1.6" fill="#16A34A"/>
-          </svg>`;
-      } else {
-        return `
-          <svg width="52" height="52" viewBox="0 0 64 64" fill="none">
-            <ellipse cx="32" cy="36" rx="28" ry="18" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2.5"/>
-            <ellipse cx="32" cy="34" rx="22" ry="13" fill="#FDE68A"/>
-            <path d="M20 33C25 29 39 29 44 33" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="32" cy="33" r="4" fill="#DC2626"/>
-            <circle cx="27" cy="35" r="2" fill="#16A34A"/>
-            <circle cx="37" cy="35" r="2" fill="#16A34A"/>
-          </svg>`;
-      }
-    }
-
-    function spawnFood(burst = false) {
-      const el = document.createElement("div");
-      el.className = "falling-item";
-      const isFalafel = Math.random() > 0.35;
-      el.innerHTML = createFoodSVG(isFalafel ? "falafel" : "hummus");
-
-      const left = Math.random() * 96;
-      const duration = burst ? (2.2 + Math.random() * 2) : (4 + Math.random() * 4);
-      const scale = 0.75 + Math.random() * 0.6;
-
-      el.style.left = left + "vw";
-      el.style.animationDuration = duration + "s";
-      el.style.transform = `scale(${scale})`;
-
-      container.appendChild(el);
-      setTimeout(() => el.remove(), duration * 1000);
-    }
-
-    setInterval(() => spawnFood(false), 450);
-    for (let i = 0; i < 12; i++) {
-      setTimeout(() => spawnFood(false), i * 180);
-    }
-
-    document.getElementById("hypeBtn").addEventListener("click", () => {
-      for (let i = 0; i < 24; i++) {
-        setTimeout(() => spawnFood(true), i * 60);
-      }
-    });
-
-    const events = [
-      { name: "التريلر (11/23)", date: new Date(2026, 10, 23, 0, 0, 0) },
-      { name: "موعد النزول (11/24)", date: new Date(2026, 10, 24, 0, 0, 0) },
-      { name: "مود القصة (11/25)", date: new Date(2026, 10, 25, 0, 0, 0) }
-    ];
-
-    let selectedIndex = 0;
-    const cards = document.querySelectorAll(".event-card");
-    const banner = document.getElementById("countdown-banner");
-
-    cards.forEach((card) => {
-      card.addEventListener("click", () => {
-        selectedIndex = Number(card.dataset.index);
-        cards.forEach((c) => c.classList.remove("active"));
-        card.classList.add("active");
-
-        banner.classList.remove("flash");
-        void banner.offsetWidth;
-        banner.classList.add("flash");
-
-        updateCountdown();
-      });
-    });
-
-    function updateCountdown() {
-      const now = new Date();
-      const targetEvent = events[selectedIndex];
-      const labelEl = document.getElementById("next-event-label");
-      const timerEl = document.getElementById("countdown");
-
-      const diff = targetEvent.date - now;
-
-      if (diff <= 0) {
-        labelEl.textContent = `🎉 ${targetEvent.name} متاح الآن!`;
-        timerEl.textContent = "انطلق الآن!";
-        return;
-      }
-
-      labelEl.textContent = `⏳ باقي على ${targetEvent.name}:`;
-      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const m = Math.floor((diff / (1000 * 60)) % 60);
-      const s = Math.floor((diff / 1000) % 60);
-
-      timerEl.textContent = `${String(d).padStart(2, "0")}d : ${String(h).padStart(2, "0")}h : ${String(m).padStart(2, "0")}m : ${String(s).padStart(2, "0")}s`;
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  </script>
+  // لا يوجد أي صوت أو موسيقى أو مؤثرات صوتية.
+})();
+</script>
 </body>
 </html>
